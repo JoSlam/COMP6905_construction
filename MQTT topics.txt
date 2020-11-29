@@ -1,0 +1,27 @@
+MQTT topics:
+
+Get
+    $aws/things/RasPi-AQ-sensor/shadow/get
+    $aws/things/RasPi-AQ-sensor/shadow/get/accepted
+    $aws/things/RasPi-AQ-sensor/shadow/get/rejected
+
+Update
+    $aws/things/RasPi-AQ-sensor/shadow/update
+    $aws/things/RasPi-AQ-sensor/shadow/update/accepted
+
+
+
+
+{
+  "state": {
+    "reported": {
+      "location": "North",
+      "timestamp": 1606663127.2693582,
+      "concentration_readings": {
+        "no2_concentration": 207.85,
+        "fine_pm_concentration": 291.91,
+        "coarse_pm_concentration": 94.55
+      }
+    }
+  }
+}
