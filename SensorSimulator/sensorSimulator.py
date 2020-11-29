@@ -30,10 +30,12 @@ while True:
     # create data payload
     data_payload = {
         "location": location,
-        "record_time": record_time,
-        "no2_measurement": nitrogen_concentration,
-        "fine_pm_measurment": fine_concentration,
-        "coarse_pm_measurement": coarse_concentration
+        "timestamp": record_time,
+        "concentration_readings": {
+            "no2_concentration": nitrogen_concentration,
+            "fine_pm_concentration": fine_concentration,
+            "coarse_pm_concentration": coarse_concentration
+        }
     }
 
     # connect to IoT gateway
