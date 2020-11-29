@@ -1,16 +1,16 @@
-from datetime import datetime
 import random
 import time
+from math import trunc
 from sensorAPI import getNitrogenMeasurement, getParticulateMatterMeasurement, ParticulateMatterType
 
-site_locations = ["North", "South", "East", "West", "Central"]
+device_ids = ["sensor1", "sensor2", "sensor3", "sensor4", "sensor5"]
 
 
 def getDataPayload():
-    record_time = time.time()
-    location = random.choice(site_locations)
+    record_time = trunc(time.time())
+    selected_device = random.choice(device_ids)
 
-    print("\nLocation: {0}".format(location))
+    print("\Device ID: {0}".format(selected_device))
     print("\nBeginning measurements: {0}".format(record_time))
 
     # get some random data
@@ -27,11 +27,11 @@ def getDataPayload():
 
     # create data payload
     data_payload = {
-        "location": location,
+        "device_id": selected_device,
         "timestamp": record_time,
-        "no2_concentration": nitrogen_concentration,
-        "fine_pm_concentration": fine_concentration,
-        "coarse_pm_concentration": coarse_concentration
+        "no2_concentration": str(nitrogen_concentration),
+        "fine_pm_concentration": str(fine_concentration),
+        "coarse_pm_concentration": str(coarse_concentration)
     }
 
     return data_payload

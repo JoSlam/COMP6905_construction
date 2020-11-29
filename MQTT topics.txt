@@ -15,13 +15,11 @@ Update
 {
   "state": {
     "reported": {
-      "location": "North",
+      "device_id": "sensor1",
       "timestamp": 1606663127.2693582,
-      "concentration_readings": {
-        "no2_concentration": 207.85,
-        "fine_pm_concentration": 291.91,
-        "coarse_pm_concentration": 94.55
-      }
+      "no2_concentration": 207.85,
+      "fine_pm_concentration": 291.91,
+      "coarse_pm_concentration": 94.55
     }
   }
 }
