@@ -1,45 +1,64 @@
-from datetime import datetime
+from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTShadowClient
+from payloadSimulator import getDataPayload
 import random
 import time
-from sensorAPI import getNitrogenMeasurement, getParticulateMatterMeasurement, ParticulateMatterType
+import json
 
-print("Simulator bootstrap time: {0}".format(time.time()))
+# Automatically called whenever the shadow is updated.
 
-site_locations = ["North", "South", "East", "West", "Central"]
 
+def updateCallback(payload, responseStatus, token):
+    print()
+    print('UPDATE: $aws/things/' + SHADOW_HANDLER +
+          '/shadow/update/#')
+    print("payload = " + payload)
+    print("responseStatus = " + responseStatus)
+    print("token = " + token)
+
+
+def loadConfig(file_path):
+    config = {}
+    with open(file_path) as config_file:
+        config = json.load(config_file)
+    return config
+
+
+print("\nSimulator bootstrap time: {0}".format(time.time()))
+
+client_config = loadConfig("config.json")
+
+SHADOW_CLIENT = client_config["shadow_client"]
+HOST_NAME = client_config["hostname"]
+ROOT_CA = client_config["root_ca"]
+PRIVATE_KEY = client_config["private_key"]
+CERT_FILE = client_config["certificate"]
+SHADOW_HANDLER = client_config["shadow_handler"]
+
+
+# Create, configure, and connect a shadow client.
+shadowClient = AWSIoTMQTTShadowClient(SHADOW_CLIENT)
+shadowClient.configureEndpoint(HOST_NAME, 8883)
+shadowClient.configureCredentials(ROOT_CA, PRIVATE_KEY,
+                                  CERT_FILE)
+shadowClient.configureConnectDisconnectTimeout(10)
+shadowClient.configureMQTTOperationTimeout(5)
+shadowClient.connect()
+
+deviceShadow = shadowClient.createShadowHandlerWithName(
+    SHADOW_HANDLER, True)
 
 while True:
-    record_time = time.time()
-    location = random.choice(site_locations)
-
-    print("\nLocation: {0}".format(location))
-    print("\nBeginning measurements: {0}".format(record_time))
-
-    # get some random data
-    nitrogen_concentration = getNitrogenMeasurement()
-    print("\nCurrent NO2 concentration: {0}".format(nitrogen_concentration))
-
-    fine_concentration = getParticulateMatterMeasurement(
-        ParticulateMatterType.Fine)
-    print("\nCurrent PM 2.5 concentration: {0}".format(fine_concentration))
-
-    coarse_concentration = getParticulateMatterMeasurement(
-        ParticulateMatterType.Coarse)
-    print("\nCurrent PM 10 concentration: {0}".format(coarse_concentration))
-
-    # create data payload
+    # Get random data payload
     data_payload = {
-        "location": location,
-        "timestamp": record_time,
-        "concentration_readings": {
-            "no2_concentration": nitrogen_concentration,
-            "fine_pm_concentration": fine_concentration,
-            "coarse_pm_concentration": coarse_concentration
+        "state": {
+            "reported": getDataPayload()
         }
     }
 
-    # connect to IoT gateway
-    # send data
+    print("data payload: {0}".format(data_payload))
+    # send device update
+    deviceShadow.shadowUpdate(json.dumps(data_payload),
+                              updateCallback, 5)
 
-    # Sleep thread for 10 minutes
+    # sleep thread for 10 minutes
     time.sleep(600)

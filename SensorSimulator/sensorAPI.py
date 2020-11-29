@@ -11,7 +11,7 @@ class ParticulateMatterType(enum.Enum):
 # sample data will consider the Efento wireless NO2 sensor (0-4 or 4000 ppb)
 def getNitrogenMeasurement():
     min = 50
-    max = 300s
+    max = 300
     return round(uniform(min, max), precision)
 
 

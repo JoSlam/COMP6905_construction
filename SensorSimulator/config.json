@@ -1,0 +1,8 @@
+{
+    "shadow_client": "shadowClient",
+    "shadow_handler": "RasPi-AQ-sensor",
+    "hostname": "a1en22n8085vk3-ats.iot.us-east-2.amazonaws.com",
+    "root_ca": "../../AmazonRootCA1.pem",
+    "private_key": "../../aa6892a7c4-private.pem.key",
+    "certificate": "../../aa6892a7c4-certificate.pem.crt"
+}
