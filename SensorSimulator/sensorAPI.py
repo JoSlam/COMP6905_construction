@@ -15,19 +15,12 @@ def getNitrogenMeasurement():
     return round(uniform(min, max), precision)
 
 
-def getParticulateMatterMeasurement(pmType):
+def getParticulateMatterMeasurement():
     min = randint(10, 50)
     max = randint(min, 350)
     
-    if(pmType == repr(ParticulateMatterType.Fine)):
-        return getFineMeasurement(min, max)
-    else:
-        return getCoarseMeasurement(min, max)
+    return getRandomValue(min, max)
 
 
-def getFineMeasurement(min, max):
+def getRandomValue(min, max):
     return round(uniform(min, max), precision)
-
-def getCoarseMeasurement(min, max):
-    return round(uniform(min, max), precision)
-
