@@ -1,13 +1,13 @@
 MQTT topics:
 
 Get
-    $aws/things/RasPi-AQ-sensor/shadow/get
-    $aws/things/RasPi-AQ-sensor/shadow/get/accepted
-    $aws/things/RasPi-AQ-sensor/shadow/get/rejected
+    $aws/things/AirQualityRasPi_grp1/shadow/get
+    $aws/things/AirQualityRasPi_grp1/shadow/get/accepted
+    $aws/things/AirQualityRasPi_grp1/shadow/get/rejected
 
 Update
-    $aws/things/RasPi-AQ-sensor/shadow/update
-    $aws/things/RasPi-AQ-sensor/shadow/update/accepted
+    $aws/things/AirQualityRasPi_grp1/shadow/update
+    $aws/things/AirQualityRasPi_grp1/shadow/update/accepted
 
 
 
@@ -16,10 +16,11 @@ Update
   "state": {
     "reported": {
       "device_id": "sensor1",
-      "timestamp": 1606663127.2693582,
-      "no2_concentration": 207.85,
-      "fine_pm_concentration": 291.91,
-      "coarse_pm_concentration": 94.55
+      "location": "North",
+      "timestamp": 1606663340,
+      "no2_concentration": "207.85",
+      "fine_pm_concentration": "291.91",
+      "coarse_pm_concentration": "94.55"
     }
   }
 }
