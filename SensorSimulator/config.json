@@ -1,8 +1,8 @@
 {
     "shadow_client": "shadowClient",
-    "shadow_handler": "RasPi-AQ-sensor",
-    "hostname": "a1en22n8085vk3-ats.iot.us-east-2.amazonaws.com",
+    "shadow_handler": "AirQualityRasPi_grp1",
+    "hostname": "a1en22n8085vk3-ats.iot.us-east-1.amazonaws.com",
     "root_ca": "../../AmazonRootCA1.pem",
-    "private_key": "../../aa6892a7c4-private.pem.key",
-    "certificate": "../../aa6892a7c4-certificate.pem.crt"
+    "private_key": "../../ef5630b0dd-private.pem.key",
+    "certificate": "../../ef5630b0dd-certificate.pem.crt"
 }
